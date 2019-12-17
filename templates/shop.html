@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>HAH</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='main.css') }}" rel="stylesheet">
+  </head>
+
+  <body>
+    {%if suc == 1 %}
+    <script>alert("Thêm sản phẩm thành công");</script>
+    {%endif%}
+    {%if error == 1 %}
+    <script>alert("Thêm sản phẩm không thành công. Hãy thử lại");</script>
+    {%endif%}
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">HAH</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{{url_for('shop')}}" >Shop</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{{url_for('index')}}">Kênh mua <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+          {%if session['shop']%}
+          <div class="navbar__spacer">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Chào {{session['shop']}}</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('shop_logout')}}">Đăng xuất</a>
+              </li>
+            </ul>
+          </div>
+          {%endif%}
+        </div>
+      </div>
+    </nav>
+    <main role="main" class="container">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3"><h4>Sản phẩm của tôi</h4></div>
+          <div class="col-md-3"><input type="button" id="btn" value="Thêm sản phẩm"/></div>
+          <div class="col-md-3"><input type="button" id="btn1" value="Sửa thông tin Shop"/></div>
+      </div>
+        <div id="content1" style="display: none; border: solid 1px; padding: 20px;" class="my-4">
+          <form method="post" action="{{url_for('shop_profile')}}">
+              <div class="form-group">
+                <label for="name">Họ Tên Chủ Cửa Hàng:</label>
+                <input type="text" class="form-control" name="HoTenChuCuaHang" placeholder="{{shop[1]}}" value="{{shop[1]}}">
+              </div>
+              <div class="form-group">
+                <label for="name">Tên cửa hàng:</label>
+                <input type="text" class="form-control" name="TenCuaHang" value="{{shop[3]}}">
+              </div>
+              <div class="form-group">
+                <label for="name">Email:</label>
+                <input type="text" class="form-control" name="Email"value="{{shop[8]}}" disabled>
+              </div>
+              <div class="form-group">
+                <label for="name">Số điện thoại</label>
+                <input type="text" class="form-control" name="Sodienthoai"value="{{shop[9]}}">
+              </div>
+              <div class="form-group">
+                <label for="name">Số tài khoản:</label>
+                <input type="text" class="form-control" name="SoTaiKhoan"value="{{shop[4]}}">
+              </div>
+              <div class="form-group">
+                <label for="name">Tên ngân hàng:</label>
+                <input type="text" class="form-control" name="TenNganHang"value="{{shop[5]}}">
+              </div>
+              <div class="form-group">
+                <label for="name">Tên người thụ hưởng:</label>
+                <input type="text" class="form-control" name="TenNguoiThuHuong"value="{{shop[6]}}">
+              </div>
+              <div class="form-group">
+                <label for="name">Trung tâm:</label>
+                <select name="MaTrungTam" class="form-control" id="exampleFormControlSelect1">
+                  <option value='TT001'>Hà Nội</option>
+                  <option value='TT002'>TP. Hồ Chí Minh</option>
+                </select>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block" type="submit">Thêm
+              </button>
+          </form>
+      </div>
+      <div id="content" style="display: none; border: solid 1px; padding: 20px;" class="my-4">
+        <form method="post" action="{{url_for('addItem')}}">
+            <div class="form-group">
+              <label for="name">Tên sản phẩm:</label>
+              <input type="text" class="form-control" name="ten">
+            </div>
+            <div class="form-group">
+              <label for="name">Thông tin:</label>
+              <input type="text" class="form-control" name="thongtin">
+            </div>
+            <div class="form-group">
+              <label for="name">Mô tả:</label>
+              <input type="text" class="form-control" name="mota">
+            </div>
+            <div class="form-group">
+              <label for="name">Giá bán:</label>
+              <input type="number" class="form-control" name="gia">
+            </div>
+            <div class="form-group">
+              <label for="name">Số lượng:</label>
+              <input type="number" class="form-control" name="soluong">
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Thêm
+            </button>
+        </form>
+    </div>
+          <div class="row dm">
+            <ul>
+              {%for x in sp%}
+              <div class="container-fluid">
+               <li>
+                <a href="{{url_for('sanpham',id=x[0])}}" >
+                  {{x[1]}}
+                </a>
+                <ul>
+                  <li>Giá: {{x[2]}} đồng </li>
+                  <li>Số Lượng: {{x[3]}} cái </li>
+              </ul>
+               </li> 
+              </div>
+            {%endfor%}
+            </ul>
+          </div>
+      </div>
+      <!-- <div class="starter-template">
+        <h1>Bootstrap starter template</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+      </div> -->
+
+    </main><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>
+            document.getElementById("btn").onclick = function () {
+                if (document.getElementById("content").style.display === 'block'){
+                  document.getElementById("content").style.display = 'none'
+                }
+                else{
+                  document.getElementById("content").style.display = 'block'
+                }
+            };
+            document.getElementById("btn1").onclick = function () {
+                if (document.getElementById("content1").style.display === 'block'){
+                  document.getElementById("content1").style.display = 'none'
+                }
+                else{
+                  document.getElementById("content1").style.display = 'block'
+                }
+            };
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
