@@ -1,0 +1,1 @@
+select * from tim_san_pham_co_so_lan_yeu_thich(0)

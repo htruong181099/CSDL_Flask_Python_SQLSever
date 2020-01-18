@@ -1,0 +1,1 @@
+select * from tim_danh_gia_cua_khach_hang(1,2)

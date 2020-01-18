@@ -1,0 +1,1 @@
+select * from tim_san_pham_ua_thich(2,50000)

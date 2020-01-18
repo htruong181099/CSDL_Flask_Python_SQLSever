@@ -1,0 +1,1 @@
+select * from tim_cua_hang_co_so_hoi_dap(1)

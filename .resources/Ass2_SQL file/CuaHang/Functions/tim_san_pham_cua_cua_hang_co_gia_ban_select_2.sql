@@ -1,0 +1,1 @@
+select * from tim_san_pham_cua_cua_hang_co_gia_ban('nguyenbuondo@gmail.com',30000)
